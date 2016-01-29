@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>圣诞快乐</title>
+	<!-- build:css dist/style.css -->
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<!-- /build -->
+	<script type="text/javascript"> 
+	// 	if(!+[1,])alert('你的浏览器版本过低，请 <a href="http://browsehappy.com/">升级浏览器');
+	var explorer = window.navigator.userAgent ;
+		//ie 
+		if (explorer.indexOf("MSIE") >= 0) {
+			alert('你的浏览器版本过低，不能正常玩游戏哦，请 <a href="http://browsehappy.com/">升级浏览器,或者更换非IE浏览器')
+		}   
+	</script>
+</head>
+<body>
+	<section id="game">
+		<!-- <h1 style="font-family: w12_0; font-size: 40px;">1092354677</h1> --> 
+		<div class="xuehuas">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div class="game_top"></div>
+		<div class="game_main clear">
+			<div class="tips">礼物已经被领啦</div>
+
+			<div class="canvasWrap fl">
+				<div  class="canvasCon">
+					<canvas id="susliks" width="600" height="600" style="disp lay:none;"></canvas>
+					
+
+				</div>
+				<!-- <div class="game_mask">
+					<div class="game_mask_con clear">
+						<p>抱歉这个礼物已经被人抢走了</p>
+						<a>返回继续游戏</a>
+					</div>
+				</div> -->
+				<!-- class="hasRandom" -->
+				<div id="reward"  style="disp lay:none;">
+					<div class="hdjp"></div>
+					<div class="reward_detail">
+						<div class="rewardImg"><img id="rewardImg" src="./images/gifts/agl.png" /></div>
+						<div class="rewardText">恭喜您获得<span id="rewardResult">双人牛肉火锅券</span></div>
+						<!-- <div class="rewardLoc"></div> -->
+					</div>
+					<div class="reward_random">
+						2015年12月21日下午3:30后，系统随机分配礼物，届时刷新页面或重新登陆该网站可见。
+					</div>
+				</div>
+				
+				<div id="rule">
+					<div class="rule_top clear">
+						<span id="leftTime">03:00:00</span>
+						<div id="beginGame" class="fr">开始游戏</div>
+					</div>
+					<div class="rule_con">
+						<p class="rule_title">游戏说明</p>
+						<p class="rule_intro">
+						在点击“开始游戏”之前，请认真阅读下面游戏规则以及浏览本次活动中提供的礼物。</br>
+						1.	浏览下方礼物并记住心愿礼物的样式、以及该礼物所需要“击中”的次数；</br>
+						2.	点击“开始游戏”，开始1分钟倒计时，当在限定时间内点击相应礼物达到指定次数时，方可获得对应礼物。</br>
+						提示：</br>
+						1.	礼物上方的数字代表距离取得该礼物还需要点击的次数，每点击中礼物一次，礼物会自动下沉，并在下一次出现时其上方的次数会减少1次，当次数为0时，方可取得礼物；</br>
+						2.	在游戏中，可先后点击不同的礼物，其上方次数最快清零的一款礼物为最终所得；</br>
+						3.	当在规定时间内选中的礼物没有库存时，游戏可以继续进行至时间结束；</br>
+						4.	若游戏结束时，仍然没有选中礼物，在当天下午3:30后，系统会自动随机分配礼物，刷新页面或重新登陆可见。</p>
+						<ul class="rule_gift_list">
+							<!-- <li class="clear">
+								<p class="gift_title">零食</p>
+								<div>
+									<img class="gift_img" src="../images/gifts/agl.png"/>
+									<p class="gift_name">eeeeeeeee</p>
+									<p class="gift_beat">eeeee</p>
+								</div>
+								<div>
+									<img class="gift_img" src="../images/gifts/agl.png"/>
+									<p class="gift_name">瑞可爷爷蛋糕券</p>
+									<p class="gift_beat">3次</p>
+								</div>
+							</li> -->	
+						</ul>
+						
+					</div>
+				</div>
+				
+			</div>
+			<div class="game_main_right fr">
+				<div  class="game_time "><span class="time_bg"></span><span id="game_time">01:00</span></div>
+				<div class="game_list ">
+					<div class="game_list_top"></div>
+					<ul id="game_list" class=" clear">
+						<li class="game_list_t">
+							<span>名称</span>
+							<span>剩余数量</span>
+							<span>剩余次數</span>
+						</li>
+						<li class="game_list_t">
+							<span>名称</span>
+							<span>剩余数量</span>
+							<span>剩余次數</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+	<script type="text/javascript" src="./configTime.js"></script>
+	<!-- build:js dist/jquery.js -->
+	<script type="text/javascript" src="./js/jquery-1.11.2.min.js"></script>
+	<!-- /build -->
+
+	<script type="text/javascript">
+		$.ajaxSetup({
+            type: "GET",
+            data: {},
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            error: function(jqXHR, textStatus, errorThrown){  
+            	console.log(jqXHR.status)
+	            switch (jqXHR.status){  
+	                // case(500):  
+	                //     alert("服务器系统内部错误");  
+	                //     break;  
+	                case(401):  
+	                    alert("没有这个用户名");  
+	                    break;  
+	                case(403):
+	                    alert("没有登陆");  
+
+	                	window.open('./index.html','_self');
+	                    // alert("无权限执行此操作");  
+	                    break;   
+	                default:  
+	                    alert("网络不给力,可以尝试刷新");  
+	            }  
+	        }   
+        });
+	 $.ajaxSetup({
+            type: "POST",
+            data: {},
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            error: function(jqXHR, textStatus, errorThrown){  
+            	console.log(jqXHR.status)
+	            switch (jqXHR.status){  
+	                // case(500):  
+	                //     alert("服务器系统内部错误");  
+	                //     break;  
+	                case(401):  
+	                    alert("没有这个用户名");  
+	                    break;  
+	                case(403):  
+	                    alert("没有登陆");  
+
+	                	window.open('./index.html','_self');
+	                    // alert("无权限执行此操作");  
+	                    break;   
+	                default:  
+	                    alert("网络不给力,可以尝试刷新");  
+	            }  
+	        }   
+        });
+	</script>
+	<!-- build:js dist/game.js -->
+	<script type="text/javascript" src="./js/create.js"></script>
+	<script type="text/javascript" src="./js/game.js"></script>
+	<!-- /build -->
+
+</html>
